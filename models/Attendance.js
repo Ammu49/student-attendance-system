@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const attendanceRecordSchema = new mongoose.Schema({
   sessionId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -68,4 +70,5 @@ const attendanceRecordSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.Schema('Attendance', attendanceRecordSchema);
+const Attendance = mongoose.model('Attendance', attendanceRecordSchema);
+export default Attendance;

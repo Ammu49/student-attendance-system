@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const moderatorSchema = new mongoose.Schema({
   userId: {
@@ -49,4 +49,5 @@ const moderatorSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.Schema('Moderator', moderatorSchema);
+const Moderator = mongoose.model('Moderator', moderatorSchema);
+export default Moderator;

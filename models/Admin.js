@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const adminSchema = new mongoose.Schema({
   userId: {
@@ -49,4 +49,5 @@ const adminSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.Schema('Admin', adminSchema);
+const Admin = mongoose.Schema('Admin', adminSchema);
+export default Admin;

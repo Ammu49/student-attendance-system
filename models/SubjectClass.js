@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const subjectClassSchema = new mongoose.Schema({
     subjectClassId: {
@@ -46,4 +46,5 @@ const subjectClassSchema = new mongoose.Schema({
     timestamps: true
 });
 
+const SubjectClass = mongoose.model('SubjectClass', subjectClassSchema);
 export default SubjectClass;
