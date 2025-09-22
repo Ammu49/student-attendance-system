@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <%= user.username %></span>
+                <button class="btn btn-outline-light" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="mb-0">Admin Control Panel</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-danger">
+                            <h5>Welcome to your Admin Dashboard!</h5>
+                            <p>You have full administrative access. You can access all APIs and manage the entire system.</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card border-danger">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Your Profile</h5>
+                                        <p class="card-text">
+                                            <strong>Username:</strong> <%= user.username %><br>
+                                            <strong>Role:</strong> <span class="badge bg-danger"><%= user.role %></span><br>
+                                            <strong>Admin ID:</strong> <%= user.id %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           
+                            
+                            <div class="col-md-3">
+                                <div class="card border-success">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Admin Tools</h5>
+                                        <button class="btn btn-success mb-2" disabled>User Management</button><br>
+                                        <button class="btn btn-info mb-2" disabled>System Settings</button><br>
+                                        <button class="btn btn-secondary mb-2" disabled>Audit Logs</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/';
+        }
+        
+        async function testAdminAPI() {
+            await testAPI('/api/users/admin', 'Admin API');
+        }
+        
+        async function testManagerAPI() {
+            await testAPI('/api/users/manager', 'Manager API');
+        }
+        
+        async function testUserAPI() {
+            await testAPI('/api/users/user', 'User API');
+        }
+        
+        async function testAPI(endpoint, apiName) {
+            const token = localStorage.getItem('token');
+            const apiResults = document.getElementById('api-results');
+            
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    apiResults.innerHTML = `
+                        <div class="alert alert-success">
+                            <strong>✅ ${apiName} Call Successful!</strong><br>
+                            <strong>Response:</strong> ${data.message}<br>
+                            <small class="text-muted">Endpoint: ${endpoint}</small>
+                        </div>
+                    `;
+                } else {
+                    apiResults.innerHTML = `
+                        <div class="alert alert-danger">
+                            <strong>❌ ${apiName} Call Failed!</strong><br>
+                            <strong>Error:</strong> ${data.message}<br>
+                            <small class="text-muted">Status: ${response.status}</small>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                apiResults.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>❌ Network Error!</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

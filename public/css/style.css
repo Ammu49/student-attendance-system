@@ -1,0 +1,148 @@
+/* Custom styles for the User Management System */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+/* Card enhancements */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Button enhancements */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Form enhancements */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Navbar enhancements */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Alert enhancements */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Badge enhancements */
+.badge {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Custom background gradient for home page */
+.bg-gradient-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-text {
+        display: none;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Dashboard specific styles */
+.dashboard-stat {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* API results styling */
+#api-results {
+    border-radius: 8px;
+    min-height: 100px;
+    transition: all 0.3s ease;
+}
+
+#api-results:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* Role-based color coding */
+.role-admin {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.role-manager {
+    color: #fd7e14;
+    font-weight: bold;
+}
+
+.role-user {
+    color: #007bff;
+    font-weight: bold;
+}
